@@ -45,14 +45,14 @@
                       facts section/facts;
                       icon section_obj/getObject/fact_icon|string:">
 
-      <h3 class="collapsible" tal:attributes="class string:collapsible ${icon}">
+      <h2 class="collapsible" tal:attributes="class string:collapsible ${icon}">
         <span tal:replace="repeat/section/number">
           1
         </span>.
         <span tal:replace="section_obj/Title">
           Information
         </span>
-      </h3>
+      </h2>
       <div class="section-content"
           tal:attributes="id section_obj/getId;">
         <div class="description" tal:content="section_obj/Description"
