@@ -1,24 +1,22 @@
 <?xml version="1.0"?>
-<object name="bise.biodiversityfactsheet.section"
+<object name="bise.biodiversityfactsheet.fact"
    meta_type="Dexterity FTI"
    i18n:domain="bise.biodiversityfactsheet" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">Section</property>
+  <property name="title" i18n:translate="">Fact</property>
   <property name="description"
-    i18n:translate="">Section of the factsheet</property>
+    i18n:translate="">Factsheet content</property>
   <property name="icon_expr">string:${portal_url}/folder_icon.png</property>
-  <property name="factory">bise.biodiversityfactsheet.section</property>
+  <property name="factory">bise.biodiversityfactsheet.fact</property>
   <property name="global_allow">False</property>
-  <property name="filter_content_types">True</property>
-  <property name="allowed_content_types">
-    <element value="Fact" />
-  </property>
+  <property name="filter_content_types">False</property>
+  <property name="allowed_content_types" />
   <property name="allow_discussion">False</property>
 
   <!-- schema and class used for content items -->
-  <property name="schema">bise.biodiversityfactsheet.section.ISection</property>
-  <property name="klass">bise.biodiversityfactsheet.section.Section</property>
+  <property name="schema">bise.biodiversityfactsheet.fact.IFact</property>
+  <property name="klass">bise.biodiversityfactsheet.fact.Fact</property>
 
   <property name="behaviors">
     <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
@@ -33,13 +31,13 @@
 
   <!-- View information -->
   <property name="link_target"></property>
-  <property name="immediate_view">folder_listing</property>
-  <property name="default_view">folder_listing</property>
+  <property name="immediate_view">view</property>
+  <property name="default_view">view</property>
   <property name="view_methods">
    <element value="view"/>
   </property>
   <property name="default_view_fallback">False</property>
-  <property name="add_permission">bise.biodiversityfactsheet.AddSection</property>
+  <property name="add_permission">bise.biodiversityfactsheet.AddFact</property>
 
 
   <!-- Method aliases -->

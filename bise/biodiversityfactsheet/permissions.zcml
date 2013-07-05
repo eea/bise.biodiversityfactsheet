@@ -6,6 +6,12 @@
 
       <!-- -*- extra stuff goes here -*- -->
        <permission
+          id="bise.biodiversityfactsheet.AddFact"
+	  title="bise.biodiversityfactsheet: Add Fact"
+	  />       
+
+
+       <permission
           id="bise.biodiversityfactsheet.AddSection"
 	  title="bise.biodiversityfactsheet: Add Section"
 	  />       
