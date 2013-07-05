@@ -3,12 +3,18 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="bise.biodiversityfactsheet">
 
-    
+
       <!-- -*- extra stuff goes here -*- -->
        <permission
-          id="bise.biodiversityfactsheet.AddBiodiversityFactsheet"
-	  title="bise.biodiversityfactsheet: Add BiodiversityFactsheet"
+          id="bise.biodiversityfactsheet.AddSection"
+	  title="bise.biodiversityfactsheet: Add Section"
 	  />       
+
+
+       <permission
+          id="bise.biodiversityfactsheet.AddBiodiversityFactsheet"
+          title="bise.biodiversityfactsheet: Add BiodiversityFactsheet"
+        />
 
 
 
