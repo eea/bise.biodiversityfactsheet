@@ -1,3 +1,7 @@
+<h3 tal:content="context/Title" class="collapsible">
+    Title
+</h3>
+<div class="fact-contents">
 <tal:block replace="structure context/text/output|nothing">
     Text Content
 </tal:block>
@@ -29,3 +33,4 @@
         </li>
     </ul>
 </tal:files>
+</div>
