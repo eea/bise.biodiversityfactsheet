@@ -1,3 +1,6 @@
+from Acquisition import aq_inner
+from plone.app.contentlisting.interfaces import IContentListing
+from plone.app.contentlisting.interfaces import IContentListingObject
 from five import grok
 from plone.directives import dexterity, form
 
@@ -53,3 +56,17 @@ class BiodiversityFactsheetView(grok.View):
     grok.context(IBiodiversityFactsheet)
     grok.require('zope2.View')
     grok.name('view')
+
+    def facts(self):
+        context = aq_inner(self.context)
+        sections = context.getFolderContents({'portal_type': 'Section'})
+        fact_data = []
+        for section in sections:
+            data = {}
+            data['object'] = IContentListingObject(section)
+            section_object = data['object'].getObject()
+            facts = section_object.getFolderContents({'portal_type': 'Fact'})
+            data['facts'] = IContentListing(facts)
+            fact_data.append(data)
+
+        return fact_data

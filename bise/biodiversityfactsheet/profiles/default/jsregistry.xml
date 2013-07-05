@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="portal_javascripts">
+  <javascript
+    id="++resource++bise.biodiversityfactsheet/jquery.collapsible.min.js"
+    cacheable="False" compression="safe" cookable="False"
+    enabled="True" expression="python:context.portal_type == 'BiodiversityFactsheet'"  inline="False"/>
+</object>
