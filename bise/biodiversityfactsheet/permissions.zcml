@@ -5,5 +5,11 @@
 
     
       <!-- -*- extra stuff goes here -*- -->
+       <permission
+          id="bise.biodiversityfactsheet.AddBiodiversityFactsheet"
+	  title="bise.biodiversityfactsheet: Add BiodiversityFactsheet"
+	  />       
+
+
 
 </configure>
