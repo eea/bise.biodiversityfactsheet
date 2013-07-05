@@ -1,0 +1,31 @@
+<tal:block replace="structure context/text/output|nothing">
+    Text Content
+</tal:block>
+
+<tal:block replace="structure context/embed|nothing">
+    Embed content
+</tal:block>
+
+<tal:files condition="view/files">
+    <ul class="files">
+        <li tal:repeat="file view/files">
+            <a href=""
+                tal:attributes="href string:${here/absolute_url}/@@download/file"
+                tal:content="file/Title">
+                File title
+            </a>
+        </li>
+    </ul>
+</tal:files>
+
+<tal:files condition="view/links">
+    <ul class="links">
+        <li tal:repeat="file view/links">
+            <a href=""
+                tal:attributes="href here/getObject/getRemoteUrl"
+                tal:content="file/Title">
+                File title
+            </a>
+        </li>
+    </ul>
+</tal:files>

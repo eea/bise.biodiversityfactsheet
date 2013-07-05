@@ -42,9 +42,10 @@
   <tal:section repeat="section view/facts">
 
     <tal:fact define="section_obj section/object;
-                      facts section/facts">
+                      facts section/facts;
+                      icon section_obj/getObject/fact_icon|string:">
 
-      <h3 class="collapsible">
+      <h3 class="collapsible" tal:attributes="class string:collapsible ${icon}">
         <span tal:replace="repeat/section/number">
           1
         </span>.
@@ -53,16 +54,18 @@
         </span>
       </h3>
       <div class="section-content"
-          tal:attributes="id section_obj/getId">
-        <div class="description" tal:content="section_obj/Description">
+          tal:attributes="id section_obj/getId;">
+        <div class="description" tal:content="section_obj/Description"
+          tal:condition="section_obj/Description">
             Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate
 
         </div>
 
-        <div class="fact" tal:repeat="fact facts"
-            tal:content="fact/getObject/render|string:kk">
-          Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate
-
+        <div class="fact" tal:repeat="fact facts">
+            <div tal:define="item fact/getObject"
+                 tal:replace="structure item/@@factrenderview">
+            Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate
+            </div>
         </div>
       </div>
 
