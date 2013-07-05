@@ -1,6 +1,4 @@
 Introduction
 ============
 
-
-
-This product may contain traces of nuts.
+Biodiversity Factsheet representation content-types for BISE site.
