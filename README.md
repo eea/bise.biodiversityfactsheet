@@ -1,4 +1,0 @@
-bise.biodiversityfactsheet
-==========================
-
-bise.biodiversityfactsheet
