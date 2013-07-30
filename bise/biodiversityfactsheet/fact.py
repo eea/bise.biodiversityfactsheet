@@ -15,9 +15,10 @@ from bise.biodiversityfactsheet import MessageFactory as _
 fact_icons = SimpleVocabulary(
     [
      SimpleTerm(value=u'text', title=_(u'Text')),
-     SimpleTerm(value=u'map', title=_(u'Icon')),
-     SimpleTerm(value=u'download', title=_(u'Download')),
+     SimpleTerm(value=u'map', title=_(u'Map')),
+     SimpleTerm(value=u'link', title=_(u'Link')),
      SimpleTerm(value=u'graph', title=_(u'Graph')),
+     SimpleTerm(value=u'pdf', title=_(u'PDF')),
      ]
     )
 
