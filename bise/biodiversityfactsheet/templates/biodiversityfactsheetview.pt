@@ -52,6 +52,7 @@
         <span tal:replace="section_obj/Title">
           Information
         </span>
+        <span class="collapse-icon"></span>
       </h2>
       <div class="section-content"
           tal:attributes="id section_obj/getId;">

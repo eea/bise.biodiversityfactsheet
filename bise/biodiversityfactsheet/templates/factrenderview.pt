@@ -1,6 +1,6 @@
 <h3 class="collapsible" >
     <span tal:content="context/title">Title</span>
-    <span tal:attributes="class string:icon ${context/fact_icon}" title="Show/hide map" style="height: 7px;width: 7px;"></span>
+    <span tal:attributes="class string:icon ${context/fact_icon}" title="Show/hide map"></span>
 </h3>
 <div class="fact-contents">
 <tal:block replace="structure context/text/output|nothing">

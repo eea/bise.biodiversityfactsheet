@@ -49,7 +49,16 @@ class IFact(form.Schema, IImageScaleTraversable):
         default=u'text',
         required=True
         )
-
+    fact_source = RichText(
+        title=_(u'Source'),
+        description=_(u'Source'),
+        required=True,
+        )
+    fact_year = schema.Text(
+        title=_(u'Year'),
+        description=_(u'Year'),
+        required=True,
+        )
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
