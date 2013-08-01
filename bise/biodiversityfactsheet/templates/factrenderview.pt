@@ -34,4 +34,12 @@
         </li>
     </ul>
 </tal:files>
+
+    <div class="data-source" tal:condition="context/fact_source">
+        <span class="data-source-title">Data sources:</span>
+        <tal:block replace="structure context/fact_source/output|nothing">
+        Source
+        </tal:block>
+        <span tal:content="context/fact_year">Year</span>
+    </div>
 </div>
