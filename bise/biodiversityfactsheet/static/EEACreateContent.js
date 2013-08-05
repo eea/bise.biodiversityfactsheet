@@ -9,44 +9,46 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/_base/lang", "dojo/_base/wind
         createLayout : function() {
             var deferred = new Deferred();
             this.mainWindow = new BorderContainer({
-                id : 'mainWindow',
+                id : options.mapName + 'mainWindow',
                 design : 'headline',
                 gutters : false,
                 style : {
-                    height : '100%',
-                    width : '100%'
+                    height : '400px',
+                    width : '940px'
                 }
-            }).placeAt("miMapa", "first");
+            }).placeAt(options.mapName, "first");
 
             //add map content
             this.mapPane = new ContentPane({
-                id : "map",
-                region : "center",
+                id : options.mapName + "map",
+                region : "left",
                 dir : "ltr",
                 style : {
+                    height: '400px',
                     width : '768px'
                 }
             }).placeAt(this.mainWindow);
             
             this.mapLegend = new ContentPane({
-                id : "legendContainer",
+                id : options.mapName + "legendContainer",
                 region : "right",
                 dir : "ltr",
                 style : {
-                    width : '192px'
+                    width : '192px',
+                    height: '400px'
                 },
-                class : "roundedCorners shadow"
+                class : "roundedCorners shadow legendContainer"
             }).placeAt(this.mainWindow);
             dojo.create("div", {
-                id : "legend"
-            }, "legendContainer"); 
+                id : options.mapName + "legend"
+            }, options.mapName + "legendContainer"); 
 
             //add the loading icon
-            dojo.create("img", {
-                id : "loader",
+            /**dojo.create("img", {
+                id : options.mapName + "loader",
                 src : "images/loading.gif",
                 className : "loader"
-            }, "map");            
+            }, options.mapName + "map");        */
             
 
             //add a class for smartphones that applies slightly different styles

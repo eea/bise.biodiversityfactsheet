@@ -49,7 +49,8 @@ function createMap() {
         var popup = new esri.dijit.PopupMobile(null, dojo.create("div"));
         mapOptions.infoWindow = popup;
     }
-    var mapDeferred = esri.arcgis.utils.createMap(options.webmap, "map", {
+    esri.config.defaults.map.width = 740;
+    var mapDeferred = esri.arcgis.utils.createMap(options.webmap, options.mapName + "map", {
         mapOptions : mapOptions,
         ignorePopups : false,
         bingMapsKey : options.bingmapskey
@@ -108,7 +109,7 @@ function createMap() {
         var legendDijit = new esri.dijit.Legend({
             map:map,
             layerInfos: legend
-        },"legend");
+        },options.mapName + "legend");
 
         legendDijit.startup();
 
