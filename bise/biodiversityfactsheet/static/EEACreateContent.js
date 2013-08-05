@@ -37,7 +37,7 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/_base/lang", "dojo/_base/wind
                     width : '192px',
                     height: '400px'
                 },
-                class : "roundedCorners shadow legendContainer"
+                className : "roundedCorners shadow legendContainer"
             }).placeAt(this.mainWindow);
             dojo.create("div", {
                 id : options.mapName + "legend"
