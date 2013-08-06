@@ -56,13 +56,13 @@ function createMap() {
         bingMapsKey : options.bingmapskey
     });
     mapDeferred.then(function(response) {
-        document.title = options.title || response.itemInfo.item.title;
-        if (dojo.byId("title")) {
+        //document.title = options.title || response.itemInfo.item.title;
+        /**if (dojo.byId("title")) {
             dojo.byId("title").innerHTML = options.title || response.itemInfo.item.title;
         }
         if (dojo.byId("subtitle")) {
             dojo.byId("subtitle").innerHTML = options.subtitle || response.itemInfo.item.snippet || "";
-        }
+        }*/
 
         map = response.map;
         map.disableScrollWheelZoom();
