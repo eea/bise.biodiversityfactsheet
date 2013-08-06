@@ -9,7 +9,7 @@ dojo.require("dojo.Deferred");
 dojo.require("dojo.DeferredList");
 dojo.require("esri.dijit.Legend");
 
-var map;
+//var map;
 var options;
 var appcontent;
 
@@ -17,13 +17,13 @@ function init(initOptions) {
 
     options = initOptions;
 
-    var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+    //var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
     //IE8 doesn't support addEventListener so check before calling
-    if (window.addEventListener) {
+    /**if (window.addEventListener) {
         window.addEventListener(orientationEvent, function() {
             orientationChanged();
         }, false);
-    }
+    }*/
 
     //Build the user interface for the application. In this case it's a simple app with a header and content
     appcontent = new utilities.EEACreateContent();
@@ -63,7 +63,7 @@ function createMap() {
         if (dojo.byId("subtitle")) {
             dojo.byId("subtitle").innerHTML = options.subtitle || response.itemInfo.item.snippet || "";
         }*/
-
+        var map;
         map = response.map;
         map.disableScrollWheelZoom();
         var layers = response.itemInfo.itemData.operationalLayers;
@@ -73,7 +73,7 @@ function createMap() {
             layer.layerObject.suspend();
             // }
             if (layer.definitionEditor) {
-                filter_layers.push(getLayerFields(layer));
+                filter_layers.push(getLayerFields(layer, map));
             } else if (layer.layers) {
                 var hasDef = false;
                 //Check ArcGISDynamicMapService layers for filters
@@ -82,7 +82,7 @@ function createMap() {
                         hasDef = true;
                         sublayer.title = layer.title;
                         sublayer.layerId = layer.id;
-                        filter_layers.push(getLayerFields(sublayer));
+                        filter_layers.push(getLayerFields(sublayer, map));
                     }
                 }));
                 if (!hasDef) {
@@ -102,7 +102,7 @@ function createMap() {
                 }
             });
 
-            this.filterLayers(layers);
+            this.filterLayers(layers, map);
 
         });
         var legendId = response.map.id.replace("map", "legend");
@@ -123,7 +123,7 @@ function createMap() {
 
 }
 
-function filterLayers(layers) {
+function filterLayers(layers, map) {
     var mapextent, url, count = 0;
     var zoomto = ((options.zoomto === 'true' || options.zoomto === true) && (options.autoquery === 'false' || options.autoquery === false || !options.autoquery));
     dojo.forEach(layers, function(layer) {
@@ -235,7 +235,7 @@ function stopIndicator(layer) {
     });
 }
 
-function getLayerFields(layer) {
+function getLayerFields(layer, map) {
 
     if (layer.layerObject) {
         var deferred = new dojo.Deferred();
