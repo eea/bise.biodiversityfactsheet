@@ -24,9 +24,10 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/_base/lang", "dojo/_base/wind
                 region : "left",
                 dir : "ltr",
                 style : {
-                    height: '400px',
+                    height: '395px',
                     width : '768px'
-                }
+                },
+                className : "roundedCorners"
             }).placeAt(this.mainWindow);
             
             this.mapLegend = new ContentPane({
@@ -35,9 +36,9 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/_base/lang", "dojo/_base/wind
                 dir : "ltr",
                 style : {
                     width : '192px',
-                    height: '400px'
+                    height: '395px'
                 },
-                className : "roundedCorners shadow legendContainer"
+                className : "roundedCorners legendContainer"
             }).placeAt(this.mainWindow);
             dojo.create("div", {
                 id : options.mapName + "legend"
