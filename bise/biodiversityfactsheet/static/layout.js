@@ -105,11 +105,12 @@ function createMap() {
             this.filterLayers(layers);
 
         });
+        var legendId = response.map.id.replace("map", "legend");
         var legend = esri.arcgis.utils.getLegendLayers(response);
         var legendDijit = new esri.dijit.Legend({
             map:map,
             layerInfos: legend
-        },options.mapName + "legend");
+        }, legendId);
 
         legendDijit.startup();
 
