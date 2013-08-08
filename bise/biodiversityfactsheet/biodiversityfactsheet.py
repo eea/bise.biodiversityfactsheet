@@ -3,8 +3,10 @@ from plone.app.contentlisting.interfaces import IContentListing
 from plone.app.contentlisting.interfaces import IContentListingObject
 from five import grok
 from plone.directives import dexterity, form
+from zope import schema
 from plone.memoize.view import memoize
 
+from bise.biodiversityfactsheet import MessageFactory as _
 
 from plone.namedfile.interfaces import IImageScaleTraversable
 
@@ -14,7 +16,21 @@ class IBiodiversityFactsheet(form.Schema, IImageScaleTraversable):
     """
     Factsheets with biodiversity info
     """
-
+    fact_countryName = schema.Text(
+        title=_(u'Country name'),
+        description=_(u'Name of the country to use in the maps '),
+        required=True,
+        )
+    fact_countryCode = schema.Text(
+        title=_(u'Country code'),
+        description=_(u'Two letter country code to use in the maps '),
+        required=True,
+        )
+    fact_countryISOCode = schema.Text(
+        title=_(u'Country ISO code'),
+        description=_(u'Three letter country ISO code to use in the maps'),
+        required=True,
+        )            
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific

@@ -18,13 +18,23 @@
     $(document).ready(function() {
       $('.collapsible').collapsible({defaultOpen: 'content-header'});
     });
-
   </script>
 
 </metal:js>
 
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
+    <tal:js tal:define="countryName context/fact_countryName;
+                        countryCode context/fact_countryCode;
+                        countryISOCode context/fact_countryISOCode;
+                        js python: '<script type=\'text/javascript\'>var countryName = \'' + countryName + '\' ;;var countryCode = \'' + countryCode + '\' ;;var countryISOCode = \'' + countryISOCode + '\';;</script>'"    
+           tal:content="structure js">
+
+        var countryName = "Austria";
+        var countryCode = "AT";
+        var countryISOCode = "AUT";
+
+    </tal:js>
 
   <div id="accordion-header">
     <h2 class="collapsible" id="content-header">Biodiversity fact sheet</h2>
