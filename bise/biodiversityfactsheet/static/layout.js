@@ -53,7 +53,8 @@ function createMap() {
     var mapDeferred = esri.arcgis.utils.createMap(options.webmap, options.mapName + "map", {
         mapOptions : mapOptions,
         ignorePopups : false,
-        bingMapsKey : options.bingmapskey
+        bingMapsKey : options.bingmapskey,
+        autoResize: true
     });
     mapDeferred.then(function(response) {
         //document.title = options.title || response.itemInfo.item.title;
