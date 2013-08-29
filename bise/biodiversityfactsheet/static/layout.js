@@ -61,13 +61,13 @@ function createMap() {
         var map;
         map = response.map;
         map.disableScrollWheelZoom();
-        dojo.connect(map, 'onLoad', function () {
+        //dojo.connect(map, 'onLoad', function () {
             dojo.connect(dijit.byId(map.id), 'resize', map, function(){
                 map.resize();
                 map.reposition();
                 }
             );
-        });
+        //});
         var layers = response.itemInfo.itemData.operationalLayers;
         var filter_layers = [];
         dojo.forEach(layers, function(layer) {
