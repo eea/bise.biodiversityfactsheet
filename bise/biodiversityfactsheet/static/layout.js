@@ -54,7 +54,7 @@ function createMap() {
         mapOptions : mapOptions,
         ignorePopups : false,
         bingMapsKey : options.bingmapskey,
-        autoResize: true
+        autoResize : true
     });
     mapDeferred.then(function(response) {
         //document.title = options.title || response.itemInfo.item.title;
@@ -206,7 +206,7 @@ function filterLayers(layers, map) {
             }
 
         }
-        if (zoomto === true) {
+        if (zoomto === true && layer.id == "World_Countries_9769") {
             extent = queryExtents(url, defExp, ["*"]);
             extent.then(function() {
                 count++;
@@ -216,10 +216,10 @@ function filterLayers(layers, map) {
                     mapextent = extent.results[0];
                 }
                 if (mapextent) {
-                    if (count === layers.length) {
+                    //if (count === layers.length) {
                         mapextent = mapextent.expand(1.2);
                         map.setExtent(mapextent);
-                    }
+                    //}
                 }
             });
         }
