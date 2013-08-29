@@ -58,15 +58,12 @@ function createMap() {
     });
     mapDeferred.then(function(response) {
         //document.title = options.title || response.itemInfo.item.title;
-        /**if (dojo.byId("title")) {
-            dojo.byId("title").innerHTML = options.title || response.itemInfo.item.title;
-        }
-        if (dojo.byId("subtitle")) {
-            dojo.byId("subtitle").innerHTML = options.subtitle || response.itemInfo.item.snippet || "";
-        }*/
         var map;
         map = response.map;
         map.disableScrollWheelZoom();
+        dojo.connect(map, 'onLoad', function () {
+            dojo.connect(dijit.byId(map.id), 'resize', map, map.resize);
+        });
         var layers = response.itemInfo.itemData.operationalLayers;
         var filter_layers = [];
         dojo.forEach(layers, function(layer) {
