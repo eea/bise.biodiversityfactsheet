@@ -62,7 +62,7 @@ function createMap() {
         map = response.map;
         map.disableScrollWheelZoom();
         //dojo.connect(map, 'onLoad', function () {
-            dojo.connect(dijit.byId(map.id), 'resize', map, function(){
+            dojo.connect(dijit.byId(map.id).domNode.parentNode.parentNode.parentNode, 'resize', map, function(){
                 map.resize();
                 map.reposition();
                 }
