@@ -11,7 +11,7 @@
     enabled="True" expression="python:context.portal_type == 'BiodiversityFactsheet'"  inline="False"/>   
   <javascript
     id="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5"
-    cacheable="False" compression="safe" cookable="False"
+    cacheable="False" compression="none" cookable="False"
     enabled="True" expression="python:context.portal_type == 'BiodiversityFactsheet'"  inline="False"/>       
   <javascript
     id="++resource++bise.biodiversityfactsheet/layout.js"
