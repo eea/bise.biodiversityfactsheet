@@ -26,12 +26,12 @@
  <stylesheet title=""
     id="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/claro/claro.css"
     media="" rel="stylesheet" rendering="link"
-    cacheable="False" compression="safe" cookable="False"
+    cacheable="False" compression="none" cookable="False"
     enabled="1" expression="python:context.portal_type == 'BiodiversityFactsheet'"/>
  <stylesheet title=""
     id="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css"
     media="" rel="stylesheet" rendering="link"
-    cacheable="False" compression="safe" cookable="False"
+    cacheable="False" compression="none" cookable="False"
     enabled="1" expression="python:context.portal_type == 'BiodiversityFactsheet'"/>
 
  
