@@ -17,13 +17,7 @@ function init(initOptions) {
 
     options = initOptions;
 
-    var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
-    //IE8 doesn't support addEventListener so check before calling
-    if (window.addEventListener) {
-        window.addEventListener(orientationEvent, function() {
-            orientationChanged();
-        }, false);
-    }
+
 
     //Build the user interface for the application. In this case it's a simple app with a header and content
     appcontent = new utilities.EEACreateContent();
@@ -59,6 +53,13 @@ function createMap() {
     mapDeferred.then(function(response) {
         //document.title = options.title || response.itemInfo.item.title;
         var map;
+        var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+        //IE8 doesn't support addEventListener so check before calling
+        if (window.addEventListener) {
+            window.addEventListener(orientationEvent, function() {
+                orientationChanged(map);
+            }, false);
+        }
         map = response.map;
         map.disableScrollWheelZoom();
         var layers = response.itemInfo.itemData.operationalLayers;
@@ -364,7 +365,7 @@ function queryExtents(url, where, id) {
     return deferred;
 }
 
-function orientationChanged() {
+function orientationChanged(map) {
     if (map) {
         map.reposition();
         map.resize();
