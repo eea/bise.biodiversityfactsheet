@@ -17,13 +17,13 @@ function init(initOptions) {
 
     options = initOptions;
 
-    //var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+    var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
     //IE8 doesn't support addEventListener so check before calling
-    /**if (window.addEventListener) {
+    if (window.addEventListener) {
         window.addEventListener(orientationEvent, function() {
             orientationChanged();
         }, false);
-    }*/
+    }
 
     //Build the user interface for the application. In this case it's a simple app with a header and content
     appcontent = new utilities.EEACreateContent();
@@ -61,13 +61,6 @@ function createMap() {
         var map;
         map = response.map;
         map.disableScrollWheelZoom();
-        //dojo.connect(map, 'onLoad', function () {
-            dojo.connect(dijit.byId(map.id).domNode.parentNode.parentNode.parentNode, 'resize', map, function(){
-                map.resize();
-                map.reposition();
-                }
-            );
-        //});
         var layers = response.itemInfo.itemData.operationalLayers;
         var filter_layers = [];
         dojo.forEach(layers, function(layer) {
