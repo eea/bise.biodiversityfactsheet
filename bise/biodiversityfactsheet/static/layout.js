@@ -367,7 +367,7 @@ function queryExtents(url, where, id) {
 
 function orientationChanged(map) {
     if (map) {
-        map.reposition();
+        //map.reposition();
         map.resize();
     }
 }
