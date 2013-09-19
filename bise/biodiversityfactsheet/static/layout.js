@@ -201,7 +201,7 @@ function filterLayers(layers, map) {
             }
 
         }
-        if (zoomto === true && layer.id == "World_Countries_9769") {
+        if (zoomto === true && layer.title == "World_Countries") {
             extent = queryExtents(url, defExp, ["*"]);
             extent.then(function() {
                 count++;
