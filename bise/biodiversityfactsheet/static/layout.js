@@ -345,7 +345,8 @@ function queryExtents(url, where, id) {
         dojo.forEach(results.features, function(feature) {
             var extent;
             if (feature.geometry.type !== "point") {
-                extent = feature.geometry.getExtent()
+                //extent = feature.geometry.getExtent()
+                extent = new esri.geometry.Extent(feature.geometry.getExtent().xmin - 200000, feature.geometry.getExtent().ymin - 200000, feature.geometry.getExtent().xmax + 200000, feature.geometry.getExtent().ymax + 200000, feature.geometry.getExtent().spatialReference);
             } else {
                 var p = feature.geometry;
                 extent = new esri.geometry.Extent((p.x - 200000), (p.y - 200000), (p.x + 200000), (p.y + 200000), p.spatialReference);
