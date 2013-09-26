@@ -43,6 +43,12 @@ class IFact(form.Schema, IImageScaleTraversable):
         required=False,
         )
 
+    webmapid = schema.Text(
+        title=_(u'Webmap ID'),
+        description=_(u'Webmap id(s) separated by commas'),
+        required=False,
+        )
+
     fact_icon = schema.Choice(
         title=_(u'Icon to show next to the title'),
         vocabulary=fact_icons,
@@ -107,6 +113,11 @@ class FactRenderView(grok.View):
         context = aq_inner(self.context)
         links = context.getFolderContents({'portal_type': 'Link'})
         return IContentListing(links)
+
+    def getMapIds(self):
+        context = aq_inner(self.context)
+        return context.webmapid.split(",")
+        #return webmapid.split(",")
 
 
 @grok.subscribe(IFact, IObjectAddedEvent)

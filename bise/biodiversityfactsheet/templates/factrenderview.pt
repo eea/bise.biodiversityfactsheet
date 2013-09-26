@@ -11,6 +11,35 @@
     Embed content
 </tal:block>
 
+<tal:maps tal:define="icon context/fact_icon;webmapid context/webmapid" condition="python:icon == 'map' and webmapid">
+    <tal:map tal:repeat="map view/getMapIds">
+        <script tal:content='structure string:        dojo.ready(function(){
+
+                var defaults = {
+                    webmap: "${map}",
+                    bingmapskey: commonConfig.bingMapsKey,
+                    sharingurl: "",
+                    proxyurl: "",
+                    helperServices: commonConfig.helperServices,
+                    Name: countryName,
+                    CountryCode: countryCode,
+                    CountryCodeISO: countryISOCode,
+                    autoquery: "false",
+                    zoomto: "true",
+                    mapName: "${context/id}-${map}"
+                };
+
+
+                var app = new utilities.App(defaults);
+                  app.init().then(function(options){
+                    init(options);
+                });
+            });' />
+
+        <div tal:attributes="id string:${context/id}-${map}" style="width:940px;height:400px"></div>
+    </tal:map>
+</tal:maps>
+
 <tal:files condition="view/files">
     <ul class="files">
         <li tal:repeat="file view/files">
