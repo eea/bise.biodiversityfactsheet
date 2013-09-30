@@ -8,6 +8,9 @@ dojo.require("utilities.EEACreateContent");
 dojo.require("dojo.Deferred");
 dojo.require("dojo.DeferredList");
 dojo.require("esri.dijit.Legend");
+dojo.require("esri.dijit.BasemapGallery");
+dojo.require("dijit.form.DropDownButton");
+dojo.require("utilities.custommenu");
 
 //var map;
 var options;
@@ -110,7 +113,7 @@ function createMap() {
 
         legendDijit.startup();
 
-
+        addBasemapGalleryMenu(map);
 
     }, function(error) {
         alert(options.i18n.viewer.errors.message, error);
@@ -373,3 +376,64 @@ function orientationChanged(map) {
     }
 }
 
+function addBasemapGalleryMenu(map) {
+    //This option is used for embedded maps so the gallery fits well with apps of smaller sizes.
+    var basemapGroup = {
+            "owner" : "",
+            "title" : ""
+        };
+
+    var ht = map.height / 2;
+    var cp = new dijit.layout.ContentPane({
+        id : options.mapName + 'basemapGallery',
+        style : "height:" + ht + "px;width:190px;"
+    });
+
+    var basemapMenu = new dijit.Menu({
+        id : options.mapName + 'basemapMenu'
+    });
+
+    //if a bing maps key is provided - display bing maps too.
+    var basemapGallery = new esri.dijit.BasemapGallery({
+        showArcGISBasemaps : true,
+        basemapsGroup : basemapGroup,
+        bingMapsKey : "",
+        map : map
+    });
+    cp.set('content', basemapMenu.domNode);
+
+    dojo.connect(basemapGallery, 'onLoad', function() {
+        var menu = dijit.byId(options.mapName + "basemapMenu")
+        dojo.forEach(basemapGallery.basemaps, function(basemap) {
+            //Add a menu item for each basemap, when the menu items are selected
+            menu.addChild(new utilities.custommenu({
+                label : basemap.title,
+                iconClass : "menuIcon",
+                iconSrc : basemap.thumbnailUrl,
+                onClick : function() {
+                    basemapGallery.select(basemap.id);
+                }
+            }));
+        });
+    });
+
+    var button = new dijit.form.DropDownButton({
+        label : "Basemap",
+        id : options.mapName + "basemapBtn",
+        iconClass : "esriBasemapIcon",
+        title : "Basemap Gallery",
+        dropDown : cp
+    });
+    
+    //dojo.byId(options.mapName + "legendContainer").appendChild(button.domNode);
+    dojo.byId(options.mapName + "legendContainer").insertBefore(button.domNode, dojo.byId(options.mapName + "legend"));
+
+    dojo.connect(basemapGallery, "onSelectionChange", function() {
+        //close the basemap window when an item is selected
+        //destroy and recreate the overview map  - so the basemap layer is modified.
+        destroyOverview();
+        dijit.byId(options.mapName + 'basemapBtn').closeDropDown();
+    });
+
+    basemapGallery.startup();
+}
