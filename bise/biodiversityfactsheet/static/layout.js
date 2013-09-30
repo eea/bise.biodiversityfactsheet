@@ -111,9 +111,11 @@ function createMap() {
             layerInfos: legend
         }, legendId);
 
+        
         legendDijit.startup();
 
-        addBasemapGalleryMenu(map);
+        var mapId = response.map.id.replace("map", "");
+        addBasemapGalleryMenu(map, mapId);
 
     }, function(error) {
         alert(options.i18n.viewer.errors.message, error);
@@ -376,7 +378,7 @@ function orientationChanged(map) {
     }
 }
 
-function addBasemapGalleryMenu(map) {
+function addBasemapGalleryMenu(map, mapId) {
     //This option is used for embedded maps so the gallery fits well with apps of smaller sizes.
     var basemapGroup = {
             "owner" : "",
@@ -385,12 +387,12 @@ function addBasemapGalleryMenu(map) {
 
     var ht = map.height / 2;
     var cp = new dijit.layout.ContentPane({
-        id : options.mapName + 'basemapGallery',
+        id : mapId + 'basemapGallery',
         style : "height:" + ht + "px;width:190px;"
     });
 
     var basemapMenu = new dijit.Menu({
-        id : options.mapName + 'basemapMenu'
+        id : mapId + 'basemapMenu'
     });
 
     //if a bing maps key is provided - display bing maps too.
@@ -403,7 +405,7 @@ function addBasemapGalleryMenu(map) {
     cp.set('content', basemapMenu.domNode);
 
     dojo.connect(basemapGallery, 'onLoad', function() {
-        var menu = dijit.byId(options.mapName + "basemapMenu")
+        var menu = dijit.byId(mapId + "basemapMenu")
         dojo.forEach(basemapGallery.basemaps, function(basemap) {
             //Add a menu item for each basemap, when the menu items are selected
             menu.addChild(new utilities.custommenu({
@@ -419,20 +421,20 @@ function addBasemapGalleryMenu(map) {
 
     var button = new dijit.form.DropDownButton({
         label : "Basemap",
-        id : options.mapName + "basemapBtn",
+        id : mapId + "basemapBtn",
         iconClass : "esriBasemapIcon",
         title : "Basemap Gallery",
         dropDown : cp
     });
     
     //dojo.byId(options.mapName + "legendContainer").appendChild(button.domNode);
-    dojo.byId(options.mapName + "legendContainer").insertBefore(button.domNode, dojo.byId(options.mapName + "legend"));
+    dojo.byId(mapId + "legendContainer").insertBefore(button.domNode, dojo.byId(options.mapName + "legend"));
 
     dojo.connect(basemapGallery, "onSelectionChange", function() {
         //close the basemap window when an item is selected
         //destroy and recreate the overview map  - so the basemap layer is modified.
         destroyOverview();
-        dijit.byId(options.mapName + 'basemapBtn').closeDropDown();
+        dijit.byId(mapId + 'basemapBtn').closeDropDown();
     });
 
     basemapGallery.startup();
