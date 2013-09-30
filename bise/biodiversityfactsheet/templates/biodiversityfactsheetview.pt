@@ -17,7 +17,9 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $('.collapsible').collapsible({defaultOpen: 'content-header'});
+      $("body").addClass("claro");
     });
+    
   </script>
 
 </metal:js>
