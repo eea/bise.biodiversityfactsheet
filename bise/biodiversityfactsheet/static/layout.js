@@ -428,7 +428,7 @@ function addBasemapGalleryMenu(map, mapId) {
     });
     
     //dojo.byId(options.mapName + "legendContainer").appendChild(button.domNode);
-    dojo.byId(mapId + "legendContainer").insertBefore(button.domNode, dojo.byId(options.mapName + "legend"));
+    dojo.byId(mapId + "legendContainer").insertBefore(button.domNode, dojo.byId(mapId + "legend"));
 
     dojo.connect(basemapGallery, "onSelectionChange", function() {
         //close the basemap window when an item is selected
