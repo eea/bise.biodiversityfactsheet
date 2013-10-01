@@ -16,7 +16,7 @@
 <metal:js fill-slot="javascript_head_slot">
   <script type="text/javascript">
     $(document).ready(function() {
-      $('.collapsible').collapsible({defaultOpen: 'content-header'});
+      $('.collapsible').collapsiblePanel({defaultOpen: 'content-header'});
       $("body").addClass("claro");
     });
     
