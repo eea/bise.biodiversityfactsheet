@@ -8,6 +8,9 @@ dojo.require("utilities.EEACreateContent");
 dojo.require("dojo.Deferred");
 dojo.require("dojo.DeferredList");
 dojo.require("esri.dijit.Legend");
+dojo.require("esri.dijit.BasemapGallery");
+dojo.require("dijit.form.DropDownButton");
+dojo.require("utilities.custommenu");
 
 //var map;
 var options;
@@ -17,13 +20,7 @@ function init(initOptions) {
 
     options = initOptions;
 
-    //var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
-    //IE8 doesn't support addEventListener so check before calling
-    /**if (window.addEventListener) {
-        window.addEventListener(orientationEvent, function() {
-            orientationChanged();
-        }, false);
-    }*/
+
 
     //Build the user interface for the application. In this case it's a simple app with a header and content
     appcontent = new utilities.EEACreateContent();
@@ -59,15 +56,15 @@ function createMap() {
     mapDeferred.then(function(response) {
         //document.title = options.title || response.itemInfo.item.title;
         var map;
+        var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+        //IE8 doesn't support addEventListener so check before calling
+        if (window.addEventListener) {
+            window.addEventListener(orientationEvent, function() {
+                orientationChanged(map);
+            }, false);
+        }
         map = response.map;
         map.disableScrollWheelZoom();
-        //dojo.connect(map, 'onLoad', function () {
-            dojo.connect(dijit.byId(map.id).domNode.parentNode.parentNode.parentNode, 'resize', map, function(){
-                map.resize();
-                map.reposition();
-                }
-            );
-        //});
         var layers = response.itemInfo.itemData.operationalLayers;
         var filter_layers = [];
         dojo.forEach(layers, function(layer) {
@@ -114,9 +111,11 @@ function createMap() {
             layerInfos: legend
         }, legendId);
 
+        
         legendDijit.startup();
 
-
+        var mapId = response.map.id.replace("map", "");
+        addBasemapGalleryMenu(map, mapId);
 
     }, function(error) {
         alert(options.i18n.viewer.errors.message, error);
@@ -207,7 +206,7 @@ function filterLayers(layers, map) {
             }
 
         }
-        if (zoomto === true && layer.id == "World_Countries_9769") {
+        if (zoomto === true && layer.title == "World Countries") {
             extent = queryExtents(url, defExp, ["*"]);
             extent.then(function() {
                 count++;
@@ -351,7 +350,8 @@ function queryExtents(url, where, id) {
         dojo.forEach(results.features, function(feature) {
             var extent;
             if (feature.geometry.type !== "point") {
-                extent = feature.geometry.getExtent()
+                //extent = feature.geometry.getExtent()
+                extent = new esri.geometry.Extent(feature.geometry.getExtent().xmin - 200000, feature.geometry.getExtent().ymin - 200000, feature.geometry.getExtent().xmax + 200000, feature.geometry.getExtent().ymax + 200000, feature.geometry.getExtent().spatialReference);
             } else {
                 var p = feature.geometry;
                 extent = new esri.geometry.Extent((p.x - 200000), (p.y - 200000), (p.x + 200000), (p.y + 200000), p.spatialReference);
@@ -371,10 +371,71 @@ function queryExtents(url, where, id) {
     return deferred;
 }
 
-function orientationChanged() {
+function orientationChanged(map) {
     if (map) {
         map.reposition();
-        map.resize();
+        //map.resize();
     }
 }
 
+function addBasemapGalleryMenu(map, mapId) {
+    //This option is used for embedded maps so the gallery fits well with apps of smaller sizes.
+    var basemapGroup = {
+            "owner" : "",
+            "title" : ""
+        };
+
+    var ht = map.height / 2;
+    var cp = new dijit.layout.ContentPane({
+        id : mapId + 'basemapGallery',
+        style : "height:" + ht + "px;width:190px;"
+    });
+
+    var basemapMenu = new dijit.Menu({
+        id : mapId + 'basemapMenu'
+    });
+
+    //if a bing maps key is provided - display bing maps too.
+    var basemapGallery = new esri.dijit.BasemapGallery({
+        showArcGISBasemaps : true,
+        basemapsGroup : basemapGroup,
+        bingMapsKey : "",
+        map : map
+    });
+    cp.set('content', basemapMenu.domNode);
+
+    dojo.connect(basemapGallery, 'onLoad', function() {
+        var menu = dijit.byId(mapId + "basemapMenu")
+        dojo.forEach(basemapGallery.basemaps, function(basemap) {
+            //Add a menu item for each basemap, when the menu items are selected
+            menu.addChild(new utilities.custommenu({
+                label : basemap.title,
+                iconClass : "menuIcon",
+                iconSrc : basemap.thumbnailUrl,
+                onClick : function() {
+                    basemapGallery.select(basemap.id);
+                }
+            }));
+        });
+    });
+
+    var button = new dijit.form.DropDownButton({
+        label : "Basemap",
+        id : mapId + "basemapBtn",
+        iconClass : "esriBasemapIcon",
+        title : "Basemap Gallery",
+        dropDown : cp
+    });
+    
+    //dojo.byId(options.mapName + "legendContainer").appendChild(button.domNode);
+    dojo.byId(mapId + "legendContainer").insertBefore(button.domNode, dojo.byId(mapId + "legend"));
+
+    dojo.connect(basemapGallery, "onSelectionChange", function() {
+        //close the basemap window when an item is selected
+        //destroy and recreate the overview map  - so the basemap layer is modified.
+        destroyOverview();
+        dijit.byId(mapId + 'basemapBtn').closeDropDown();
+    });
+
+    basemapGallery.startup();
+}
