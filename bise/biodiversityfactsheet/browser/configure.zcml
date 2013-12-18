@@ -5,6 +5,13 @@
     xmlns:grok="http://namespaces.zope.org/grok"
     i18n_domain="bise.biodiversityfactsheet">
 
-  <!-- -*- extra stuff goes here -*- -->	
+  <!-- -*- extra stuff goes here -*- -->
+    <browser:page
+        name="biodiversity-factsheet-indexer"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".contentindexer.ContentIndexer"
+        permission="cmf.ManagePortal"
+        />
+
 
 </configure>

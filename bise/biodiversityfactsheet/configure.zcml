@@ -6,6 +6,7 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.plone.org/zcml"
     i18n_domain="bise.biodiversityfactsheet">
 
   <!-- Include configuration for dependencies listed in setup.py -->
@@ -35,5 +36,19 @@
       />
 
   <!-- -*- extra stuff goes here -*- -->
+  <adapter
+    factory=".cataloguer.FactsheetCataloguer"
+    for=".biodiversityfactsheet.IBiodiversityFactsheet"
+    provides="bise.catalogueindexer.interfaces.ICatalogueBase"
+    zcml:condition="installed bise.catalogueindexer"
+    />
+
+  <!-- Do not index Fact objects -->
+  <adapter
+    factory="bise.catalogueindexer.adapters.basic.BaseObjectCataloguer"
+    for=".fact.IFact"
+    provides="bise.catalogueindexer.interfaces.ICatalogueBase"
+    zcml:condition="installed bise.catalogueindexer"
+    />
 
 </configure>
