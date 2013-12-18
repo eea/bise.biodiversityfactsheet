@@ -2,8 +2,6 @@ from bise.catalogueindexer.adapters.basic import PACDocumentCataloguer
 from zope.component import getMultiAdapter
 from zope.globalrequest import getRequest
 
-import cgi
-
 
 class FactsheetCataloguer(PACDocumentCataloguer):
 
@@ -18,6 +16,6 @@ class FactsheetCataloguer(PACDocumentCataloguer):
                     (fact.getObject(), request),
                     name='factrenderview')()
 
-        items['article[content]'] = cgi.escape(contents)
+        items['article[content]'] = contents
 
         return items
