@@ -1,6 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/five"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:grok="http://namespaces.zope.org/grok"
     i18n_domain="bise.biodiversityfactsheet">
@@ -9,7 +9,7 @@
     <browser:page
         name="biodiversity-factsheet-indexer"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        class=".contentindexer.ContentIndexer"
+        class=".cataloguer.ContentIndexer"
         permission="cmf.ManagePortal"
         />
 
