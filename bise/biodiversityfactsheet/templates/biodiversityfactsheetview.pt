@@ -18,6 +18,24 @@
     $(document).ready(function() {
       $('.collapsible').collapsiblePanel({defaultOpen: 'content-header'});
       $("body").addClass("claro");
+      $("#targetFilter input:checkbox").change(function() {
+      var filter = "?";
+      if ($("#targetFilter input:checked").length > 0){
+        var targets = "";
+        for(i=0; i <  $("#targetFilter input:checked").length; i++){
+          targets += $("input:checked")[i].value + ","
+        }
+        targets = targets.substring(0, targets.length - 1)
+        filter += "targets=" + targets;
+      }
+        if (window.location.pathname.endsWith("/view")){
+          window.location.href = window.location.pathname + filter;
+        }else if (window.location.pathname.endsWith("/")){
+          window.location.href = window.location.pathname + "view" + filter;
+        }else{
+          window.location.href = window.location.pathname + "/view" + filter;
+        }
+      })
     });
     
   </script>
@@ -37,7 +55,70 @@
         var countryISOCode = "AUT";
 
     </tal:js>
-
+  
+  <div id="targetFilter">
+    <label for="target1">
+      <div class="targetLabel target1Label">
+        <tal:block tal:define="targets python:'';targets request/targets | targets">
+            <input type="checkbox"
+              id="target1" value="Target 1"
+              tal:attributes="checked python:targets.find('Target 1') >= 0;"/>
+        </tal:block>
+        EU TARGET 1
+      </div>
+    </label>
+    <label for="target2">
+      <div class="targetLabel target2Label">
+        <tal:block tal:define="targets python:'';targets request/targets | targets">
+            <input type="checkbox"
+              id="target2" value="Target 2"
+              tal:attributes="checked python:targets.find('Target 2') >= 0;"/>
+        </tal:block>
+        EU TARGET 2
+      </div>
+    </label>
+    <label for="target3">
+      <div class="targetLabel target3Label">
+        <tal:block tal:define="targets python:'';targets request/targets | targets">
+            <input type="checkbox"
+              id="target3" value="Target 3"
+              tal:attributes="checked python:targets.find('Target 3') >= 0;"/>
+        </tal:block>
+        EU TARGET 3
+      </div>
+    </label>
+    <label for="target4">
+      <div class="targetLabel target4Label">
+        <tal:block tal:define="targets python:'';targets request/targets | targets">
+            <input type="checkbox"
+              id="target4" value="Target 4"
+              tal:attributes="checked python:targets.find('Target 4') >= 0;"/>
+        </tal:block>
+          EU TARGET 4
+      </div>
+    </label>
+    <label for="target5">
+      <div class="targetLabel target5Label">
+        <tal:block tal:define="targets python:'';targets request/targets | targets">
+            <input type="checkbox"
+              id="target5" value="Target 5"
+              tal:attributes="checked python:targets.find('Target 5') >= 0;"/>
+        </tal:block>
+        EU TARGET 5
+      </div>
+    </label>
+    <label for="target6">
+      <div class="targetLabel target6Label">
+        <tal:block tal:define="targets python:'';targets request/targets | targets">
+            <input type="checkbox"
+              id="target6" value="Target 6"
+              tal:attributes="checked python:targets.find('Target 6') >= 0;"/>
+        </tal:block>
+        EU TARGET 6
+      </div>
+    </label>
+  </div>
+  <div style="clear:both"></div>
   <div id="accordion-header">
     <h2 class="collapsible" id="content-header">Biodiversity fact sheet</h2>
     <div class="main-section-content">

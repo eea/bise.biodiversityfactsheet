@@ -1,5 +1,31 @@
 <h3 class="collapsible" >
     <span tal:content="context/title">Title</span>
+    <tal:block tal:repeat="target context/targets">
+        <span  class="targetSmallLabel target1Label"
+            tal:condition="python:target == 'Target 1'">
+            EU TARGET 1
+        </span>
+        <span  class="targetSmallLabel target2Label"
+            tal:condition="python:target == 'Target 2'">
+            EU TARGET 2
+        </span>
+        <span  class="targetSmallLabel target3Label"
+            tal:condition="python:target == 'Target 3'">
+            EU TARGET 3
+        </span>
+        <span  class="targetSmallLabel target4Label"
+            tal:condition="python:target == 'Target 4'">
+            EU TARGET 4
+        </span>
+        <span  class="targetSmallLabel target5Label"
+            tal:condition="python:target == 'Target 5'">
+            EU TARGET 5
+        </span>
+        <span  class="targetSmallLabel target6Label"
+            tal:condition="python:target == 'Target 6'">
+            EU TARGET 6
+        </span>
+    </tal:block>
     <span tal:attributes="class string:icon ${context/fact_icon}" title="Show/hide map"></span>
 </h3>
 <div class="fact-contents">
