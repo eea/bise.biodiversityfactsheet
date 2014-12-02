@@ -74,15 +74,22 @@ class BiodiversityFactsheetView(grok.View):
             fact_list = []
             if targets == "":
                 fact_list = facts
-            else:
-                for fact in facts:
-                    targetsArray = targets.split(",")
-                    if fact.getObject().targets is not None:
-                        for target in targetsArray:
-                            if target in fact.getObject().targets:
-                                fact_list.append(fact)
-            if len(fact_list) > 0 or section_object.Title() == "General information":
                 data['facts'] = IContentListing(fact_list)
                 fact_data.append(data)
+            else:
+                if section_object.Title() == "General information":
+                    fact_list = facts
+                    data['facts'] = IContentListing(fact_list)
+                    fact_data.append(data)
+                else:
+                    for fact in facts:
+                        targetsArray = targets.split(",")
+                        if fact.getObject().targets is not None:
+                            for target in targetsArray:
+                                if target in fact.getObject().targets:
+                                    fact_list.append(fact)
+                    if len(fact_list) > 0:
+                        data['facts'] = IContentListing(fact_list)
+                        fact_data.append(data)
 
         return fact_data
