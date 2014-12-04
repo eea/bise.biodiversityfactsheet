@@ -11,4 +11,12 @@
         handler=".1_2.upgrade"
         profile="bise.biodiversityfactsheet:default" />
 
+    <genericsetup:upgradeStep
+        title="Diff tool support"
+        description="Type info"
+        source="2"
+        destination="3"
+        handler=".2_3.upgrade"
+        profile="bise.biodiversityfactsheet:default" />
+
 </configure>
