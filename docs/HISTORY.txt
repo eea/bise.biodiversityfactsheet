@@ -5,6 +5,7 @@ Changelog
 -----------------
 
 - Add tagging support to biodiversityfactsheets [MikelS]
+- Include EU targets filter [MikelS]
 
 1.1.2 (2013-12-18)
 ---------------------
