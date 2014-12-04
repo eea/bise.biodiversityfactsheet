@@ -27,6 +27,7 @@
     <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousToggle"/>
     <element value="plone.app.dexterity.behaviors.discussion.IAllowDiscussion"/>
     <element value="Products.CMFPlone.interfaces.constrains.ISelectableConstrainTypes"/>
+    <element value="bise.theme.behaviors.tagging.ICatalogueTags"/>
    </property>
 
   <!-- View information -->
