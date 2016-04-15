@@ -1,10 +1,12 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.4.dev0'
+NAME = 'bise.biodiversityfactsheet'
+PATH = NAME.split('.') + ['version.txt']
+VERSION = open(os.path.join(*PATH)).read().strip()
 
-setup(name='bise.biodiversityfactsheet',
-      version=version,
+setup(name=NAME,
+      version=VERSION,
       description="Content-types to manage Biodiversity factsheets",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
