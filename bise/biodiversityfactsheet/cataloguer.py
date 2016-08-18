@@ -18,17 +18,17 @@ class FactsheetCataloguer(PACDocumentCataloguer):
 
         items['article[content]'] = contents
         targets = []
-        for target in self.context.targets:
+        for target in (self.context.targets or []):
             targets.append(target)
         items['article[target_list]'] = u','.join(targets)
         actions = []
-        for action in self.context.actions:
+        for action in (self.context.actions or []):
             actions.append(action)
         items['article[action_list]'] = u','.join(actions)
         tags = []
-        for tag in self.context.cataloguetags:
+        for tag in (self.context.cataloguetags or []):
             tagid, tagname = tag.split('-')
             tags.append(tagname)
-        items['article[tag_list]'] = u','.join(tags)        
+        items['article[tag_list]'] = u','.join(tags)
 
         return items

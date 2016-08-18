@@ -1,9 +1,10 @@
 Changelog
 =========
 
-1.4 - (unreleased)
+1.4.dev0 - (unreleased)
 ----------------
-- Nothing changed yet.
+- Bug fix: don't fail on catalogue indexing if FactSheet has no targets
+  [tiberich #75155]
 
 1.3 - (2014-12-04)
 ----------------
