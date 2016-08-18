@@ -2,3 +2,4 @@ recursive-include bise *
 recursive-include docs *
 include *
 global-exclude *.pyc
+global-include *.mo
