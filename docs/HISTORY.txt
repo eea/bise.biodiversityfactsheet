@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.5.dev0 - (unreleased)
+-----------------------
+
 1.4 - (2016-08-18)
 ------------------
 - Bug fix: don't fail on catalogue indexing if FactSheet has no targets
