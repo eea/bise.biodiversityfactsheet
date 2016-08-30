@@ -31,4 +31,7 @@ class FactsheetCataloguer(PACDocumentCataloguer):
             tags.append(tagname)
         items['article[tag_list]'] = u','.join(tags)
 
+        items['article[countries]'] = \
+            (self.context.fact_countryCode or '').strip()
+
         return items
