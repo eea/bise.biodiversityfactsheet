@@ -39,7 +39,8 @@
 
 <tal:maps tal:define="icon context/fact_icon;webmapid context/webmapid" condition="python:icon == 'map' and webmapid">
     <tal:map tal:repeat="map view/getMapIds">
-        <script tal:content='structure string:        dojo.ready(function(){
+        <script tal:content='structure string:
+        dojo.ready(function(){
 
                 var defaults = {
                     webmap: "${map}",
@@ -60,8 +61,8 @@
                   app.init().then(function(options){
                     init(options);
                 });
-            });' />
-
+            });' >
+        </script>
         <div tal:attributes="id string:${context/id}-${map}" style="width:940px;height:400px"></div>
     </tal:map>
 </tal:maps>

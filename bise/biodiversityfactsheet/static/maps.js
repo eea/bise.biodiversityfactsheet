@@ -1,2 +1,2 @@
-  dojo.require("utilities.app");
-  dojo.require("templateConfig.commonConfig");
+dojo.require("utilities.app");
+dojo.require("templateConfig.commonConfig");

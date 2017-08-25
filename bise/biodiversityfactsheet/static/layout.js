@@ -13,18 +13,17 @@ dojo.require("dijit.form.DropDownButton");
 dojo.require("utilities.custommenu");
 
 //var map;
-var options;
-var appcontent;
+window.window.options;
+window.appcontent;
+
 
 function init(initOptions) {
 
-    options = initOptions;
-
-
+    window.options = initOptions;
 
     //Build the user interface for the application. In this case it's a simple app with a header and content
-    appcontent = new utilities.EEACreateContent();
-    appcontent.createLayout().then(function() {
+    window.appcontent = new utilities.EEACreateContent();
+    window.appcontent.createLayout().then(function() {
         createMap();
     });
 
@@ -42,19 +41,19 @@ function createMap() {
         infoWindow : popup,
         logo : false
     };
-    if (appcontent._isMobile) {
+    if (window.appcontent._isMobile) {
         var popup = new esri.dijit.PopupMobile(null, dojo.create("div"));
         mapOptions.infoWindow = popup;
     }
     esri.config.defaults.map.width = 740;
-    var mapDeferred = esri.arcgis.utils.createMap(options.webmap, options.mapName + "map", {
+    var mapDeferred = esri.arcgis.utils.createMap(window.options.webmap, window.options.mapName + "map", {
         mapOptions : mapOptions,
         ignorePopups : false,
-        bingMapsKey : options.bingmapskey,
+        bingMapsKey : window.options.bingmapskey,
         autoResize : true
     });
     mapDeferred.then(function(response) {
-        //document.title = options.title || response.itemInfo.item.title;
+        //document.title = window.options.title || response.itemInfo.item.title;
         var map;
         var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
         //IE8 doesn't support addEventListener so check before calling
@@ -118,7 +117,7 @@ function createMap() {
         addBasemapGalleryMenu(map, mapId);
 
     }, function(error) {
-        alert(options.i18n.viewer.errors.message, error);
+        alert(window.options.i18n.viewer.errors.message, error);
 
     });
 
@@ -126,13 +125,13 @@ function createMap() {
 
 function filterLayers(layers, map) {
     var mapextent, url, count = 0;
-    var zoomto = ((options.zoomto === 'true' || options.zoomto === true) && (options.autoquery === 'false' || options.autoquery === false || !options.autoquery));
+    var zoomto = ((window.options.zoomto === 'true' || window.options.zoomto === true) && (window.options.autoquery === 'false' || window.options.autoquery === false || !window.options.autoquery));
     dojo.forEach(layers, function(layer) {
         //get the input values to the filter - if no value is specified use the defaults
         var extent, values = [];
         dojo.forEach(layer.definitionEditor.inputs, function(input) {
             dojo.forEach(input.parameters, function(param) {
-                var value = this.options[input.prompt] || "";
+                var value = this.window.options[input.prompt] || "";
 
                 var field = null;
                 var fields = null;
@@ -180,11 +179,11 @@ function filterLayers(layers, map) {
             layer.layerObject.resume();
             url = layer.layerObject.url;
             //if auto query is true, query layer using filter as where clause and add result if only one is returned
-            if (layer.popupInfo && !querying && (options.autoquery === 'true' || options.autoquery === true)) {
+            if (layer.popupInfo && !querying && (window.options.autoquery === 'true' || window.options.autoquery === true)) {
                 layer.layerObject.setInfoTemplate(new esri.dijit.PopupTemplate(layer.popupInfo));
                 queryFeature(url, defExp, layer.layerObject);
 
-            } else if (options.zoomto === 'true' || options.zoomto === true) {
+            } else if (window.options.zoomto === 'true' || window.options.zoomto === true) {
                 //zoom to extent of filtered features
                 zoomto = true;
             }
@@ -198,9 +197,9 @@ function filterLayers(layers, map) {
             mapLayer.resume();
             url = mapLayer.url + "/" + layer.id
             //if auto query is true, query layer using filter as where clause and add result if only one is returned
-            if (layer.popupInfo && !querying && (options.autoquery === 'true' || options.autoquery === true)) {
+            if (layer.popupInfo && !querying && (window.options.autoquery === 'true' || window.options.autoquery === true)) {
                 queryFeature(url, defExp, mapLayer, layer.popupInfo);
-            } else if (options.zoomto === 'true' || options.zoomto === true) {
+            } else if (window.options.zoomto === 'true' || window.options.zoomto === true) {
                 //zoom to extent of filtered features
                 zoomto = true;
             }
@@ -295,7 +294,7 @@ function queryFeature(url, where, layer, popupInfo) {
             map.infoWindow.setFeatures(results.slice(0, 1));
             map.infoWindow.show(point);
 
-            if (options.zoomto === 'true' || options.zoomto === true) {
+            if (window.options.zoomto === 'true' || window.options.zoomto === true) {
                 //zoom to result
                 if (results[0].geometry.type === 'point')
                     map.centerAndZoom(point, 10);
@@ -323,7 +322,7 @@ function queryFeature(url, where, layer, popupInfo) {
                 result.features[0]['infoTemplate'] = new esri.dijit.PopupTemplate(info);
                 map.infoWindow.setFeatures(result.features.slice(0, 1));
                 map.infoWindow.show(point);
-                if (options.zoomto === 'true' || options.zoomto === true) {
+                if (window.options.zoomto === 'true' || window.options.zoomto === true) {
                     //zoom to result
                     if (result.features[0].geometry.type === 'point')
                         map.centerAndZoom(point, 10);
@@ -427,7 +426,7 @@ function addBasemapGalleryMenu(map, mapId) {
         dropDown : cp
     });
     
-    //dojo.byId(options.mapName + "legendContainer").appendChild(button.domNode);
+    //dojo.byId(window.options.mapName + "legendContainer").appendChild(button.domNode);
     dojo.byId(mapId + "legendContainer").insertBefore(button.domNode, dojo.byId(mapId + "legend"));
 
     dojo.connect(basemapGallery, "onSelectionChange", function() {
