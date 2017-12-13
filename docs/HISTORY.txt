@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.7.dev0 - (unreleased)
------------------------
+1.7 - (2017-12-13)
+------------------
 - Fix daviz visualisations in IE and Firefox
   [krisztina #89953]
 
@@ -52,3 +52,4 @@ Changelog
 -------------------
 - Initial release
   [erral]
+
