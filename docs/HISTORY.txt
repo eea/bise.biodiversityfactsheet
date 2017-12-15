@@ -3,6 +3,8 @@ Changelog
 
 1.8.dev0 - (unreleased)
 -----------------------
+- Remove bad fix for daviz visualisations
+  [krisztina #89953]
 
 1.7 - (2017-12-13)
 ------------------
@@ -55,4 +57,3 @@ Changelog
 -------------------
 - Initial release
   [erral]
-
