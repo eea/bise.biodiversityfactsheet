@@ -36,4 +36,11 @@
     template="../templates/factrenderview.pt"
     />
 
+  <browser:page
+    for="bise.biodiversityfactsheet.fact.IFact"
+    name="simple-edit"
+    class=".views.SimpleFactEditForm"
+    permission="cmf.ModifyPortalContent"
+    />
+
 </configure>

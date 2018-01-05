@@ -27,16 +27,3 @@ class IBiodiversityFactsheet(form.Schema, IImageScaleTraversable):
 
 class BiodiversityFactsheet(dexterity.Container):
     implements(IBiodiversityFactsheet)
-    # Add your class methods and properties here
-
-
-# View class
-# The view will automatically use a similarly named template in
-# templates called biodiversityfactsheetview.pt .
-# Template filenames should be all lower case.
-# The view will render when you request a content object with this
-# interface with "/@@view" appended unless specified otherwise
-# using grok.name below.
-# This will make this view the default view for your content-type
-
-# grok.templatedir('templates')

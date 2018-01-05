@@ -1,16 +1,16 @@
 from Acquisition import aq_inner
+from bise.biodiversityfactsheet.fact import IBasicFact
 from plone.app.contentlisting.interfaces import (IContentListing,
                                                  IContentListingObject)
+from plone.dexterity.browser import edit
 from plone.memoize.view import memoize
 from Products.Five.browser import BrowserView
 
-# from zope.component import getMultiAdapter
+# from z3c.form.field import Fields
+# from zope import schema
 
 
 class BiodiversityFactsheetView(BrowserView):
-    # grok.context(IBiodiversityFactsheet)
-    # grok.require('zope2.View')
-    # grok.name('view')
 
     @memoize
     def facts(self):
@@ -77,3 +77,9 @@ class FactRenderView(BrowserView):
         context = aq_inner(self.context)
 
         return context.webmapid.split(",")
+
+
+class SimpleFactEditForm(edit.DefaultEditForm):
+
+    schema = IBasicFact
+    additionalSchemata = ()

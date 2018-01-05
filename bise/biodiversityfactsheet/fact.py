@@ -17,18 +17,7 @@ fact_icons = SimpleVocabulary(
     )
 
 
-# Interface class; used to define content-type schema.
-class IFact(form.Schema, IImageScaleTraversable):
-    """
-    Factsheet content
-    """
-
-    text = RichText(
-        title=_(u'Text'),
-        description=_(u'Text of this fact'),
-        required=False,
-        )
-
+class IBasicFact(form.Schema):
     embed = schema.Text(
         title=_(u'Embed code'),
         description=_(u'Paste here content coming from external site. '
@@ -39,6 +28,18 @@ class IFact(form.Schema, IImageScaleTraversable):
     webmapid = schema.Text(
         title=_(u'Webmap ID'),
         description=_(u'Webmap id(s) separated by commas'),
+        required=False,
+        )
+
+
+class IFact(IBasicFact, IImageScaleTraversable):
+    """
+    Factsheet content
+    """
+
+    text = RichText(
+        title=_(u'Text'),
+        description=_(u'Text of this fact'),
         required=False,
         )
 
