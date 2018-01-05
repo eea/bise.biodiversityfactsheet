@@ -15,7 +15,7 @@
 <metal:main fill-slot="content-core">
   <metal:content-core define-macro="content-core">
 
-    <tal:content replace="structure view/contents" />
+    <tal:content replace="structure context/@@factrenderview" />
 
   </metal:content-core>
 </metal:main>

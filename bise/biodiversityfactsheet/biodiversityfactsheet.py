@@ -1,21 +1,13 @@
-from Acquisition import aq_inner
-from plone.app.contentlisting.interfaces import IContentListing
-from plone.app.contentlisting.interfaces import IContentListingObject
-from five import grok
-from plone.directives import dexterity, form
-from zope import schema
-from plone.memoize.view import memoize
-
 from bise.biodiversityfactsheet import MessageFactory as _
-
+from plone.directives import dexterity, form
 from plone.namedfile.interfaces import IImageScaleTraversable
+from zope import schema
+from zope.interface import implements
 
 
-# Interface class; used to define content-type schema.
 class IBiodiversityFactsheet(form.Schema, IImageScaleTraversable):
-    """
-    Factsheets with biodiversity info
-    """
+    """ Factsheets with biodiversity info """
+
     fact_countryName = schema.Text(
         title=_(u'Country name'),
         description=_(u'Name of the country to use in the maps '),
@@ -30,14 +22,11 @@ class IBiodiversityFactsheet(form.Schema, IImageScaleTraversable):
         title=_(u'Country ISO code'),
         description=_(u'Three letter country ISO code to use in the maps'),
         required=True,
-        )            
+        )
 
-# Custom content-type class; objects created for this content type will
-# be instances of this class. Use this class to add content-type specific
-# methods and properties. Put methods that are mainly useful for rendering
-# in separate view classes.
+
 class BiodiversityFactsheet(dexterity.Container):
-    grok.implements(IBiodiversityFactsheet)
+    implements(IBiodiversityFactsheet)
     # Add your class methods and properties here
 
 
@@ -50,46 +39,4 @@ class BiodiversityFactsheet(dexterity.Container):
 # using grok.name below.
 # This will make this view the default view for your content-type
 
-grok.templatedir('templates')
-
-
-class BiodiversityFactsheetView(grok.View):
-    grok.context(IBiodiversityFactsheet)
-    grok.require('zope2.View')
-    grok.name('view')
-
-    @memoize
-    def facts(self):
-        context = aq_inner(self.context)
-        sections = context.getFolderContents({'portal_type': 'Section'})
-        fact_data = []
-
-        targets = self.request.form.get('targets', '')
-
-        for section in sections:
-            data = {}
-            data['object'] = IContentListingObject(section)
-            section_object = data['object'].getObject()
-            facts = section_object.getFolderContents({'portal_type': 'Fact'})
-            fact_list = []
-            if targets == "":
-                fact_list = facts
-                data['facts'] = IContentListing(fact_list)
-                fact_data.append(data)
-            else:
-                if section_object.Title() == "General information":
-                    fact_list = facts
-                    data['facts'] = IContentListing(fact_list)
-                    fact_data.append(data)
-                else:
-                    for fact in facts:
-                        targetsArray = targets.split(",")
-                        if fact.getObject().targets is not None:
-                            for target in targetsArray:
-                                if target in fact.getObject().targets:
-                                    fact_list.append(fact)
-                    if len(fact_list) > 0:
-                        data['facts'] = IContentListing(fact_list)
-                        fact_data.append(data)
-
-        return fact_data
+# grok.templatedir('templates')
