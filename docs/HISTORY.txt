@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0.dev0 - (unreleased)
------------------------
+2.0 - (2018-03-16)
+------------------
 - Hide accordion header title
   [krisztina #90236]
 
@@ -66,3 +66,4 @@ Changelog
 -------------------
 - Initial release
   [erral]
+
