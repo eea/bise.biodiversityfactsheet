@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.0.dev0 - (unreleased)
+-----------------------
+- Hide accordion header title
+  [krisztina #90236]
+
 1.9 - (2018-01-11)
 ------------------
 * Added simplified form to edit Facts
@@ -61,4 +66,3 @@ Changelog
 -------------------
 - Initial release
   [erral]
-
