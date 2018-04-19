@@ -13,20 +13,17 @@ dojo.require("dijit.form.DropDownButton");
 dojo.require("utilities.custommenu");
 
 //var map;
-window.window.options;
-window.appcontent;
-
+// window.window.options;
+// window.appcontent;
 
 function init(initOptions) {
+  window.options = initOptions;
 
-    window.options = initOptions;
-
-    //Build the user interface for the application. In this case it's a simple app with a header and content
-    window.appcontent = new utilities.EEACreateContent();
-    window.appcontent.createLayout().then(function() {
-        createMap();
-    });
-
+  //Build the user interface for the application. In this case it's a simple app with a header and content
+  window.appcontent = new utilities.EEACreateContent();
+  window.appcontent.createLayout().then(function() {
+    createMap();
+  });
 }
 
 function createMap() {
@@ -110,7 +107,7 @@ function createMap() {
             layerInfos: legend
         }, legendId);
 
-        
+
         legendDijit.startup();
 
         var mapId = response.map.id.replace("map", "");
@@ -266,7 +263,7 @@ function queryFeature(url, where, layer, popupInfo) {
     var query = new esri.tasks.Query();
     query.where = where;
     info = popupInfo
-    
+
     //outfields are the fieldNames in info.fieldInfos array, where fieldInfo visible=true
     var outFields = dojo.map(dojo.filter(info.fieldInfos, function(fieldInfo) {
         return fieldInfo.visible
@@ -425,7 +422,7 @@ function addBasemapGalleryMenu(map, mapId) {
         title : "Basemap Gallery",
         dropDown : cp
     });
-    
+
     //dojo.byId(window.options.mapName + "legendContainer").appendChild(button.domNode);
     dojo.byId(mapId + "legendContainer").insertBefore(button.domNode, dojo.byId(mapId + "legend"));
 

@@ -3,6 +3,8 @@ Changelog
 
 2.1.dev0 - (unreleased)
 -----------------------
+- Adjust factsheet render view to enable compatibility with new country pages
+  [tiberich #90236]
 
 2.0 - (2018-03-16)
 ------------------
