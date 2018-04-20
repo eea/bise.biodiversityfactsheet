@@ -148,7 +148,8 @@
         </span>
         <span class="collapse-icon"></span>
       </h2> -->
-      <div class="section-content"
+
+      <!-- <div class="section-content"
           tal:attributes="id section_obj/getId;">
         <div class="description" tal:content="section_obj/Description"
           tal:condition="section_obj/Description">
@@ -162,6 +163,53 @@
             Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate
             </div>
         </div>
+      </div> -->
+      <div class="section-content"
+        tal:attributes="id section_obj/getId;">
+        <div class="description" tal:content="section_obj/Description"
+          tal:condition="section_obj/Description">
+            Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate
+
+        </div>
+
+        <div class="content-container">
+          <div class="row">
+            <div class="i-sticky sidebar-wrapper col-md-3 sidebar">
+              <ul class="nav-list nav-menu-list-style">
+
+                <li tal:repeat="fact python:view.facts()[0]['facts']">
+                  <a class="tree-toggle nav-header"
+                    tal:attributes='href string:${fact/getURL}/#nd-${repeat/fact/index}'
+                    href="/Plone/sandbox/country-factsheets/austria#httc-3"
+                    >
+                    <p tal:content="fact/Title">MAINSTREAMING GREEN INFRASTRUCTURE</p>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="tab-content-wrapper col-md-9 ">
+              <tal:rep tal:repeat="fact python:view.facts()[0]['facts']">
+                <div
+                  class="country-overview-content-box"
+                  id="httc-3"
+                  tal:attributes="id string:nd-${repeat/fact/index}"
+                  >
+
+                  <!-- <h2 tal:content="fact/Title">3.&#38;nbsp; MAINSTREAMING GREEN INFRASTRUCTURE</h2> -->
+
+                  <div tal:define="item fact/getObject"
+                    tal:replace="structure item/@@factrenderview">
+                    Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi    metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate
+                  </div>
+                </div>
+              </tal:rep>
+            </div>
+
+          </div>
+        </div>
+
       </div>
 
     </tal:fact>

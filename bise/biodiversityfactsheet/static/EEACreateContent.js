@@ -14,7 +14,7 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/_base/lang", "dojo/_base/wind
         gutters : false,
         style : {
           height : '400px',
-          width : '600px'
+          width : '100%'
         }
       }).placeAt(options.mapName, "first");
 
@@ -26,7 +26,7 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/_base/lang", "dojo/_base/wind
         style : {
           height: '395px',
           // width : '768px'
-          width : '400px'
+          width : '70%'
         },
         className : "roundedCorners"
       }).placeAt(this.mainWindow);
@@ -36,7 +36,7 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/_base/lang", "dojo/_base/wind
         region : "right",
         dir : "ltr",
         style : {
-          width : '192px',
+          width : '30%',
           height: '395px'
         },
         className : "roundedCorners legendContainer"
@@ -71,4 +71,3 @@ define(["dojo/_base/declare", "dojo/parser", "dojo/_base/lang", "dojo/_base/wind
   });
   return EEACreateContent;
 });
-

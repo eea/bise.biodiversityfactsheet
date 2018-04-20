@@ -3,6 +3,8 @@ Changelog
 
 2.1.dev0 - (unreleased)
 -----------------------
+- Restructure facts section
+  [krisztina, #90242]
 - Adjust factsheet render view to enable compatibility with new country pages
   [tiberich #90236]
 
@@ -71,4 +73,3 @@ Changelog
 -------------------
 - Initial release
   [erral]
-
