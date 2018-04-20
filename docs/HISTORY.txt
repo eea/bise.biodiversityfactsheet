@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.1.dev0 - (unreleased)
------------------------
+2.1 - (2018-04-20)
+------------------
 - Restructure facts section
   [krisztina, #90242]
 - Adjust factsheet render view to enable compatibility with new country pages
@@ -73,3 +73,4 @@ Changelog
 -------------------
 - Initial release
   [erral]
+
