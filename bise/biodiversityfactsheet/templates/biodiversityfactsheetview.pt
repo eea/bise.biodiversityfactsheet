@@ -12,8 +12,20 @@
     content unless activated by creation of a view class with a matching name.
 </tal:comment>
 
-
 <metal:js fill-slot="javascript_head_slot">
+
+  <!-- redirect countryfactsheetview to the main country page
+    /countries/nature-directives/austria -> /countries/austria##t-1 -->
+  <script type="text/javascript"
+          tal:define="
+          portal_url context/portal_url;
+          url python: context.absolute_url().split('/');
+          country python: url[-1];
+          factsheetview python: 'nature-directives' in url;"
+          tal:condition="factsheetview"
+          tal:content="python:'location.href=\''+ portal_url +'/'+'countries/'+ country +'##t-1'+'\''">
+  </script>
+
   <script type="text/javascript">
     $(document).ready(function() {
       $('.collapsible').collapsiblePanel({defaultOpen: 'content-header'});

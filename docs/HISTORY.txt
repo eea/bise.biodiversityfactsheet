@@ -3,6 +3,8 @@ Changelog
 
 2.2.dev0 - (unreleased)
 -----------------------
+- Redirect countryfactsheetview to the main country page
+  [krisztina]
 
 2.1 - (2018-04-20)
 ------------------
@@ -76,4 +78,3 @@ Changelog
 -------------------
 - Initial release
   [erral]
-
