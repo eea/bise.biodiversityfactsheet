@@ -1,6 +1,9 @@
 Changelog
 =========
 
+2.3.dev0 - (unreleased)
+-----------------------
+
 2.2 - (2020-01-29)
 ------------------
 - Redirect countryfactsheetview to the main country page
